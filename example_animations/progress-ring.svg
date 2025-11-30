@@ -1,0 +1,18 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .ring {
+      fill: none;
+      stroke: #808495;
+      stroke-width: 2;
+      stroke-dasharray: 28;
+      stroke-dashoffset: 20;
+      stroke-linecap: round;
+      transform-origin: center;
+      animation: spin 1.4s linear infinite;
+    }
+    @keyframes spin {
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <circle cx="12" cy="12" r="5" class="ring"/>
+</svg>

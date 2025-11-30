@@ -1,0 +1,15 @@
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .hourglass {
+      fill: #808495;
+      transform-origin: center;
+      animation: flip 2.4s ease-in-out infinite;
+    }
+    @keyframes flip {
+      0%, 45% { transform: rotate(0deg); }
+      50%, 95% { transform: rotate(180deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+  <path class="hourglass" d="M6 2l.01 6L10 12l-3.99 4 .01 6h12l.01-6L14 12l3.99-4 .01-6H6z"/>
+</svg>

@@ -1,0 +1,15 @@
+[project]
+name = "streamlit-custom"
+version = "0.1.0"
+description = "Custom Streamlit build with modified loading animation"
+requires-python = ">=3.9"
+dependencies = [
+    "grpcio-tools>=1.76.0",
+    "mypy-protobuf>=3.7.0",
+    "protobuf>=6.33.1",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "ruff",
+]
