@@ -2,6 +2,41 @@
 
 Build Streamlit from source with a custom loading animation (replace the "running man").
 
+```
+Once all is setup it should be just 3 steps:
+
+./build_streamlit.sh clone
+
+./select_animation.sh 4
+
+./build_streamlit.sh full
+```
+
+Then output will show something like this and running streamlit in this uv env will now show custom animation. Then you can also grab the static folder here + copy to other installations of the same version (inside streamlit folder that script clones in the folder you are working on)
+
+```
+...
+static/media/flake-1.B2r5AHMK.png
+static/media/flake-2.BnWSExPC.png
+static/media/snowflake.JU2jBHL8.svg
+
+sent 19,197,759 bytes  received 3,597 bytes  38,402,712.00 bytes/sec
+total size is 19,179,076  speedup is 1.00
+
+[STEP] Installing custom Streamlit...
+Resolved 37 packages in 523ms
+      Built streamlit @ file:///home/luis/CustomStreamlit/streamlit/lib
+Prepared 1 package in 197ms
+Installed 1 package in 1ms
+ + streamlit==1.52.0 (from file:///home/luis/CustomStreamlit/streamlit/lib)
+
+Done! Custom Streamlit installed.
+
+Activate with: source .venv/bin/activate
+Run with: streamlit run your_app.py
+```
+
+
 ## Quick Overview
 
 There are two ways to use custom animations:
@@ -41,7 +76,7 @@ mkdir ~/CustomStreamlit && cd ~/CustomStreamlit
 git clone --depth 1 https://github.com/streamlit/streamlit.git
 
 # Create uv environment
-uv venv
+uv init
 source .venv/bin/activate
 ```
 
