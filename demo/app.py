@@ -4,6 +4,15 @@ import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
+from st_custom_static import install, GITHUB_REPO
+
+
+@st.cache_resource(show_spinner=False)
+def _apply_icon() -> None:
+    install("italic-h-sweep", None, GITHUB_REPO)
+
+
+_apply_icon()
 
 st.set_page_config(
     page_title="st-custom-static",

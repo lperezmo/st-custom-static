@@ -6,8 +6,9 @@ name = "st-custom-static-demo"
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
-    "streamlit>=1.45.0",
+    "streamlit==1.57.0",
     "pandas>=2.0.0",
     "altair>=5.0.0",
     "numpy>=1.24.0",
+    "st-custom-static",
 ]
