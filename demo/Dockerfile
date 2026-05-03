@@ -2,20 +2,18 @@ FROM python:3.11-slim
 
 RUN useradd -m -u 1000 appuser
 
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+
 WORKDIR /app
 
-RUN pip install --no-cache-dir \
-    streamlit==1.57.0 \
-    pandas \
-    altair \
-    numpy \
-    st-custom-static
+COPY pyproject.toml .
+RUN uv pip install --system --no-cache -r pyproject.toml
 
 # Bake the custom icon into the image at build time
 RUN st-install --icon italic-h-sweep
 
-COPY demo/app.py .
-COPY demo/.streamlit .streamlit
+COPY app.py .
+COPY .streamlit .streamlit
 
 USER appuser
 

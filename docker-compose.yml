@@ -1,5 +1,5 @@
 services:
   app:
-    build: .
+    build: ./demo
     ports:
       - "7860:7860"
