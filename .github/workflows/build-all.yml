@@ -1,14 +1,24 @@
-name: Build Streamlit Custom Static
+name: Build All Icons x All Versions
 
 on:
   workflow_dispatch:
-    inputs:
-      icon:
-        description: Icon animation to build
-        required: true
-        default: italic-h-sweep
-        type: choice
-        options:
+  push:
+    branches: [main]
+    paths:
+      - icons/**
+      - .github/workflows/build-all.yml
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: ${{ matrix.icon }} / ${{ matrix.version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        icon:
           - italic-h-sweep
           - italic-h-striped
           - italic-h-wave
@@ -22,49 +32,20 @@ on:
           - pulsing-dot
           - rotating-gear
           - hourglass
-      versions:
-        description: >
-          Streamlit versions, comma-separated.
-          Broad set: 1.45.1,1.46.1,1.47.1,1.48.1,1.49.1,1.50.0,1.51.0,1.52.0,1.53.1,1.54.0,1.55.0,1.56.0,1.57.0
-        required: false
-        default: 1.51.0,1.52.0,1.53.1,1.54.0,1.55.0,1.56.0,1.57.0
-
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/build-release.yml
-
-permissions:
-  contents: write
-
-jobs:
-  setup:
-    runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.parse.outputs.matrix }}
-      icon: ${{ steps.parse.outputs.icon }}
-    steps:
-      - id: parse
-        shell: bash
-        env:
-          ICON: ${{ inputs.icon || 'italic-h-sweep' }}
-          VERSIONS: ${{ inputs.versions || '1.55.0,1.56.0,1.57.0' }}
-        run: |
-          MATRIX=$(python3 -c "
-          import os, json
-          v = os.environ['VERSIONS'].split(',')
-          print(json.dumps({'version': [x.strip() for x in v]}))
-          ")
-          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
-          echo "icon=$ICON" >> "$GITHUB_OUTPUT"
-
-  build:
-    name: ${{ matrix.version }}
-    needs: setup
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
+        version:
+          - "1.45.1"
+          - "1.46.1"
+          - "1.47.1"
+          - "1.48.1"
+          - "1.49.1"
+          - "1.50.0"
+          - "1.51.0"
+          - "1.52.0"
+          - "1.53.1"
+          - "1.54.0"
+          - "1.55.0"
+          - "1.56.0"
+          - "1.57.0"
 
     steps:
       - uses: actions/checkout@v4.2.2
@@ -87,12 +68,10 @@ jobs:
 
       - name: Apply icon
         run: |
-          ICON="${{ needs.setup.outputs.icon }}"
-          SRC="icons/${ICON}.tsx"
+          SRC="icons/${{ matrix.icon }}.tsx"
           DST="streamlit-src/frontend/app/src/components/StatusWidget/IconRunning.tsx"
           [ -f "$SRC" ] || { echo "Icon not found: $SRC"; exit 1; }
           cp "$SRC" "$DST"
-          echo "Applied $ICON"
 
       - name: Enable corepack
         working-directory: streamlit-src/frontend
@@ -113,7 +92,7 @@ jobs:
       - name: Package static files
         id: package
         run: |
-          ICON="${{ needs.setup.outputs.icon }}"
+          ICON="${{ matrix.icon }}"
           VERSION="${{ matrix.version }}"
           ZIPNAME="streamlit-${VERSION}-${ICON}.zip"
 
@@ -133,7 +112,7 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          ICON="${{ needs.setup.outputs.icon }}"
+          ICON="${{ matrix.icon }}"
           VERSION="${{ matrix.version }}"
           TAG="v${VERSION}-${ICON}"
           ZIPNAME="${{ steps.package.outputs.zipname }}"
@@ -143,10 +122,8 @@ jobs:
           ## Quick install
 
           \`\`\`bash
-          python scripts/install_static.py --icon ${ICON} --version ${VERSION}
+          st-install --icon ${ICON} --version ${VERSION}
           \`\`\`
-
-          Or download and extract manually: replace Streamlit's \`static/\` folder with the extracted one.
 
           Built from commit: \`${{ github.sha }}\`"
 
