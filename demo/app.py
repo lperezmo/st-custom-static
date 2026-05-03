@@ -22,9 +22,9 @@ st.markdown(
 
 _dark = st.context.theme.type == "dark"
 _grad = (
-    "linear-gradient(90deg,#7dd3fc,#93c5fd)"
+    "linear-gradient(90deg,#818cf8,#a78bfa)"
     if _dark
-    else "linear-gradient(90deg,#004F98,#0369a1)"
+    else "linear-gradient(90deg,#6366f1,#7c3aed)"
 )
 st.html(f"""
 <div style="text-align:center;padding:0.25rem 0 0.75rem">
