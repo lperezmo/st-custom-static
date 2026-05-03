@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/github/license/lperezmo/st-custom-static)](LICENSE)
 [![Build](https://img.shields.io/github/actions/workflow/status/lperezmo/st-custom-static/build-release.yml?label=build)](https://github.com/lperezmo/st-custom-static/actions/workflows/build-release.yml)
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://st-custom-static.streamlit.app/)
+[![HF Space](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-Demo-blue)](https://huggingface.co/spaces/lperezmo/st-custom-static)
 
 Drop-in replacements for Streamlit's default loading animation. Swap out the running man with one of 13 polished alternatives in seconds.
 
