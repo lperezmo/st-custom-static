@@ -35,3 +35,15 @@ st-install = "st_custom_static.install:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["st_custom_static"]
+
+[tool.semantic_release]
+version_toml = ["pyproject.toml:project.version"]
+tag_format = "v{version}"
+commit_message = "chore(release): v{version}"
+allow_zero_version = false
+allowed_tags = ["feat", "fix", "perf", "refactor", "style", "docs", "test", "build", "ci", "chore", "revert"]
+minor_tags = ["feat"]
+patch_tags = ["fix", "perf"]
+
+[tool.ruff]
+extend-exclude = ["manual-build/"]

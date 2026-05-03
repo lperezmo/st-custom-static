@@ -11,7 +11,9 @@ st.set_page_config(
 )
 
 st.title("st-custom-static")
-st.caption("Custom loading animations for Streamlit. The spinner in the top-right uses a custom icon.")
+st.caption(
+    "Custom loading animations for Streamlit. The spinner in the top-right uses a custom icon."
+)
 
 
 @st.cache_data(show_spinner="Generating data...")
@@ -54,7 +56,10 @@ with st.sidebar:
 
     st.divider()
     st.caption("Install the custom icon:")
-    st.code("pip install git+https://github.com/lperezmo/st-custom-static\nst-install --icon italic-h-sweep", language="bash")
+    st.code(
+        "pip install git+https://github.com/lperezmo/st-custom-static\nst-install --icon italic-h-sweep",
+        language="bash",
+    )
 
 if mode == "Time series":
     df = make_series(n_days, seed)
