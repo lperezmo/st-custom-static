@@ -68,18 +68,19 @@ with st.sidebar:
     if mode == "Time series":
         n_days = st.slider("Days", 90, 730, 365)
         seed = st.number_input("Seed", value=42, step=1)
-        if st.button("Reload", width="stretch"):
-            st.cache_data.clear()
     else:
         n_steps = st.slider("Steps", 100, 2000, 500)
         volatility = st.slider("Volatility", 0.5, 5.0, 1.5)
         seed = st.number_input("Seed", value=42, step=1)
-        if st.button("Run", width="stretch"):
-            st.cache_data.clear()
 
     st.divider()
     st.caption("Install locally:")
     st.code("pip install st-custom-static\nst-install --icon italic-h-sweep", language="bash")
+
+_btn_label = "Reload" if mode == "Time series" else "Run simulation"
+if st.button(_btn_label, type="primary"):
+    st.cache_data.clear()
+    st.rerun()
 
 if mode == "Time series":
     df = make_series(n_days, seed)
