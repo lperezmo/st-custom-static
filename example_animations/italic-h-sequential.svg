@@ -1,0 +1,17 @@
+<svg width="72" height="44" viewBox="0 0 72 44" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bar { fill: #808495; }
+    .bl { animation: seq 1.2s ease-in-out infinite 0.0s; }
+    .bm { animation: seq 1.2s ease-in-out infinite 0.3s; }
+    .br { animation: seq 1.2s ease-in-out infinite 0.6s; }
+    @keyframes seq {
+      0%   { opacity: 0.2; }
+      25%  { opacity: 1; }
+      50%  { opacity: 0.2; }
+      100% { opacity: 0.2; }
+    }
+  </style>
+  <polygon class="bar bl" points="18,0 30,0 21,42 9,42"/>
+  <polygon class="bar bm" points="26,17 52,17 51,27 25,27"/>
+  <polygon class="bar br" points="60,0 72,0 63,42 51,42"/>
+</svg>

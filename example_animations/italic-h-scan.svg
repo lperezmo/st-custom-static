@@ -1,0 +1,27 @@
+<svg width="72" height="44" viewBox="0 0 72 44" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .ghost { fill: #808495; opacity: 0.2; }
+    .scanner {
+      fill: #808495;
+      opacity: 0.9;
+      animation: scan 1.6s linear infinite;
+    }
+    @keyframes scan {
+      0%   { transform: translateX(-72px); }
+      100% { transform: translateX(72px); }
+    }
+  </style>
+  <defs>
+    <clipPath id="h-scan">
+      <polygon points="18,0 30,0 21,42 9,42"/>
+      <polygon points="26,17 52,17 51,27 25,27"/>
+      <polygon points="60,0 72,0 63,42 51,42"/>
+    </clipPath>
+  </defs>
+  <!-- ghost H -->
+  <polygon class="ghost" points="18,0 30,0 21,42 9,42"/>
+  <polygon class="ghost" points="26,17 52,17 51,27 25,27"/>
+  <polygon class="ghost" points="60,0 72,0 63,42 51,42"/>
+  <!-- scanning line clipped to H -->
+  <rect class="scanner" x="-4" y="0" width="8" height="44" clip-path="url(#h-scan)"/>
+</svg>

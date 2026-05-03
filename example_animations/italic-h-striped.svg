@@ -1,0 +1,49 @@
+<svg width="72" height="44" viewBox="0 0 72 44" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .s { fill: #808495; }
+    .col0 { animation: col 1.5s ease-in-out infinite; }
+    .col1 { animation: col 1.5s ease-in-out infinite 0.2s; }
+    .col2 { animation: col 1.5s ease-in-out infinite 0.4s; }
+    @keyframes col {
+      0%, 100% { opacity: 0.25; }
+      33%       { opacity: 1; }
+      66%       { opacity: 0.25; }
+    }
+    /* left bar stripes */
+    .l0 { animation: col 1.5s ease-in-out infinite 0.00s; }
+    .l1 { animation: col 1.5s ease-in-out infinite 0.08s; }
+    .l2 { animation: col 1.5s ease-in-out infinite 0.16s; }
+    .l3 { animation: col 1.5s ease-in-out infinite 0.24s; }
+    .l4 { animation: col 1.5s ease-in-out infinite 0.32s; }
+    /* mid bar stripes */
+    .m0 { animation: col 1.5s ease-in-out infinite 0.40s; }
+    .m1 { animation: col 1.5s ease-in-out infinite 0.48s; }
+    .m2 { animation: col 1.5s ease-in-out infinite 0.56s; }
+    .m3 { animation: col 1.5s ease-in-out infinite 0.64s; }
+    .m4 { animation: col 1.5s ease-in-out infinite 0.72s; }
+    /* right bar stripes */
+    .r0 { animation: col 1.5s ease-in-out infinite 0.80s; }
+    .r1 { animation: col 1.5s ease-in-out infinite 0.88s; }
+    .r2 { animation: col 1.5s ease-in-out infinite 0.96s; }
+    .r3 { animation: col 1.5s ease-in-out infinite 1.04s; }
+    .r4 { animation: col 1.5s ease-in-out infinite 1.12s; }
+  </style>
+  <!-- left bar: 5 horizontal stripes -->
+  <polygon class="s l0" points="18,0  30,0  29.3,8.4  17.3,8.4"/>
+  <polygon class="s l1" points="17.3,8.4  29.3,8.4  28.6,16.8  16.6,16.8"/>
+  <polygon class="s l2" points="16.6,16.8 28.6,16.8 27.9,25.2 15.9,25.2"/>
+  <polygon class="s l3" points="15.9,25.2 27.9,25.2 27.2,33.6 15.2,33.6"/>
+  <polygon class="s l4" points="15.2,33.6 27.2,33.6 26.6,42   14.6,42"/>
+  <!-- cross bar -->
+  <polygon class="s m0" points="26,17 31.2,17 30.8,27 25.6,27"/>
+  <polygon class="s m1" points="31.2,17 36.4,17 36.0,27 30.8,27"/>
+  <polygon class="s m2" points="36.4,17 41.6,17 41.2,27 36.0,27"/>
+  <polygon class="s m3" points="41.6,17 46.8,17 46.4,27 41.2,27"/>
+  <polygon class="s m4" points="46.8,17 52,17   51.6,27 46.4,27"/>
+  <!-- right bar: 5 stripes -->
+  <polygon class="s r0" points="60,0  72,0  71.3,8.4  59.3,8.4"/>
+  <polygon class="s r1" points="59.3,8.4  71.3,8.4  70.6,16.8  58.6,16.8"/>
+  <polygon class="s r2" points="58.6,16.8 70.6,16.8 69.9,25.2 57.9,25.2"/>
+  <polygon class="s r3" points="57.9,25.2 69.9,25.2 69.2,33.6 57.2,33.6"/>
+  <polygon class="s r4" points="57.2,33.6 69.2,33.6 68.5,42   56.5,42"/>
+</svg>

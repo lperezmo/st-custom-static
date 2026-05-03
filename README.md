@@ -26,12 +26,12 @@ st-install --restore
 
 | Name | Preview |
 |------|---------|
-| `italic-h-sweep` | italic H with a light sweep |
-| `italic-h-striped` | italic H with column-by-column stripe wave |
-| `italic-h-wave` | italic H bars filling sequentially |
-| `italic-h-scan` | italic H ghost outline with scanning line |
-| `italic-h-sequential` | italic H bars lighting up left to right |
-| `italic-h-cascade` | italic H with per-stripe cascade |
+| `italic-h-sweep` | ![italic-h-sweep](example_animations/italic-h-sweep.svg) |
+| `italic-h-striped` | ![italic-h-striped](example_animations/italic-h-striped.svg) |
+| `italic-h-wave` | ![italic-h-wave](example_animations/italic-h-wave.svg) |
+| `italic-h-scan` | ![italic-h-scan](example_animations/italic-h-scan.svg) |
+| `italic-h-sequential` | ![italic-h-sequential](example_animations/italic-h-sequential.svg) |
+| `italic-h-cascade` | ![italic-h-cascade](example_animations/italic-h-cascade.svg) |
 | `three-dots` | ![Three Dots](example_animations/three-dots.svg) |
 | `bar-chart` | ![Bar Chart](example_animations/bar-chart.svg) |
 | `progress-ring` | ![Progress Ring](example_animations/progress-ring.svg) |

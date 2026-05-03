@@ -1,0 +1,25 @@
+<svg width="72" height="44" viewBox="0 0 72 44" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    .bar { fill: #808495; opacity: 0.35; }
+    .bar-lit {
+      fill: #808495;
+      animation: sweep 1.6s ease-in-out infinite;
+    }
+    .mid { animation-delay: 0.2s; }
+    .right { animation-delay: 0.4s; }
+    @keyframes sweep {
+      0%   { opacity: 0.35; }
+      30%  { opacity: 1; }
+      60%  { opacity: 0.35; }
+      100% { opacity: 0.35; }
+    }
+  </style>
+  <!-- italic H: left bar, cross bar, right bar as parallelograms -->
+  <polygon class="bar" points="18,0 30,0 21,42 9,42"/>
+  <polygon class="bar" points="26,17 52,17 51,27 25,27"/>
+  <polygon class="bar" points="60,0 72,0 63,42 51,42"/>
+
+  <polygon class="bar-lit left"  points="18,0 30,0 21,42 9,42"/>
+  <polygon class="bar-lit mid"   points="26,17 52,17 51,27 25,27"/>
+  <polygon class="bar-lit right" points="60,0 72,0 63,42 51,42"/>
+</svg>
