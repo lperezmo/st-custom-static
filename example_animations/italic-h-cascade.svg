@@ -1,23 +1,23 @@
-<svg width="60" height="36" viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <style>
     @keyframes cascH{0%,20%,100%{opacity:.2}10%{opacity:1}}
     .cs{opacity:.2;animation:cascH 2s ease-in-out infinite}
   </style>
-  <g transform="translate(30,18) skewX(-12) translate(-30,-18)">
-    <rect class="cs" style="animation-delay:0s" x="12" y="4" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.08s" x="12" y="10" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.16s" x="12" y="16" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.24s" x="12" y="22" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.32s" x="12" y="28" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.4s" x="26" y="4" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.48s" x="26" y="10" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.56s" x="26" y="16" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.64s" x="26" y="22" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.72s" x="26" y="28" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.8s" x="40" y="4" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.88s" x="40" y="10" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:0.96s" x="40" y="16" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:1.04s" x="40" y="22" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="cs" style="animation-delay:1.12s" x="40" y="28" width="8" height="4" rx="2" fill="#004F98"/>
+  <g transform="translate(12,12) skewX(-12) translate(-12,-12)">
+    <rect class="cs" style="animation-delay:0s" x="4" y="5" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.08s" x="4" y="8" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.16s" x="4" y="11" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.24s" x="4" y="14" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.32s" x="4" y="17" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.4s" x="10" y="5" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.48s" x="10" y="8" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.56s" x="10" y="11" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.64s" x="10" y="14" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.72s" x="10" y="17" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.8s" x="16" y="5" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.88s" x="16" y="8" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.96s" x="16" y="11" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:1.04s" x="16" y="14" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:1.12s" x="16" y="17" width="4" height="2" rx="2" fill="#004F98"/>
   </g>
 </svg>

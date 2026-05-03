@@ -6,19 +6,23 @@ from pathlib import Path
 OUT = Path(__file__).resolve().parent.parent / "example_animations"
 C = "#004F98"
 
-VW, VH = 60, 36
-CX, CY = 30, 18
+# Match the 24x24 used by all other icon SVGs in this repo
+VW, VH = 24, 24
+CX, CY = 12, 12
 
-# Bar rects (x, y, w, h) at 2x scale inside 60x36 viewBox
-LX, LY, LW, LH = 12, 4, 6, 28   # left vertical bar
-MX, MY, MW, MH = 12, 17, 36, 6  # horizontal crossbar
-RX, RY, RW, RH = 42, 4, 6, 28   # right vertical bar
+# H geometry: 16px wide, 14px tall, centered in 24x24 with 4px side padding
+# Left bar  (x=4-7),  height 14 (y=5-19)
+# Right bar (x=17-20), height 14 (y=5-19)
+# Mid bar   (x=4-20), height 3  (y=11-14)
+LX, LY, LW, LH = 4,  5, 3, 14   # left vertical bar
+MX, MY, MW, MH = 4, 11, 16, 3   # horizontal crossbar
+RX, RY, RW, RH = 17, 5, 3, 14   # right vertical bar
 
-# Striped / cascade column geometry (2x of original: col_w=4->8, gap=3->6)
-COL_X = [12, 26, 40]
-COL_W = 8
-STRIPE_Y = [4, 10, 16, 22, 28]
-STRIPE_H = 4
+# Striped / cascade: col_w=4, gap=2 -> 3*4+2*2=16 wide; stripe_h=2, gap=1 -> 5*2+4*1=14 tall
+COL_X = [4, 10, 16]
+COL_W = 4
+STRIPE_Y = [5, 8, 11, 14, 17]
+STRIPE_H = 2
 
 
 def make_svg(defs: str, style: str, body: str) -> str:
@@ -36,6 +40,8 @@ def make_svg(defs: str, style: str, body: str) -> str:
 
 
 def italic_h_sweep() -> str:
+    # Sheen rects: width=9 (3x bar width of 3), centered on each bar.
+    # L/R travel ±9px, M travel ±13px (to cover full 16px crossbar).
     defs = f"""
     <linearGradient id="sheen" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="white" stop-opacity="0"/>
@@ -45,20 +51,20 @@ def italic_h_sweep() -> str:
     <clipPath id="cL"><rect x="{LX}" y="{LY}" width="{LW}" height="{LH}"/></clipPath>
     <clipPath id="cM"><rect x="{MX}" y="{MY}" width="{MW}" height="{MH}"/></clipPath>
     <clipPath id="cR"><rect x="{RX}" y="{RY}" width="{RW}" height="{RH}"/></clipPath>"""
-    # Sheen rects: width=18, centered on each bar. Travel ±18px (L/R), ±27px (M).
     style = """
-    @keyframes swpLR { 0%{transform:translateX(-18px)} 50%,100%{transform:translateX(18px)} }
-    @keyframes swpM  { 0%{transform:translateX(-27px)} 50%,100%{transform:translateX(27px)} }
+    @keyframes swpLR { 0%{transform:translateX(-9px)} 50%,100%{transform:translateX(9px)} }
+    @keyframes swpM  { 0%{transform:translateX(-13px)} 50%,100%{transform:translateX(13px)} }
     .sL{animation:swpLR 1.5s ease-in-out 0s   infinite}
     .sM{animation:swpM  1.5s ease-in-out 0.2s infinite}
     .sR{animation:swpLR 1.5s ease-in-out 0.4s infinite}"""
+    # Sheen rect base positions: centered on each bar (LX+LW/2=5.5 -> x=1, MX+MW/2=12 -> x=8, RX+RW/2=18.5 -> x=14)
     body = (
         f'    <rect x="{LX}" y="{LY}" width="{LW}" height="{LH}" fill="{C}"/>\n'
-        f'    <g clip-path="url(#cL)"><rect class="sL" x="6"  y="{LY}" width="18" height="{LH}" fill="url(#sheen)"/></g>\n'
+        f'    <g clip-path="url(#cL)"><rect class="sL" x="1"  y="{LY}" width="9" height="{LH}" fill="url(#sheen)"/></g>\n'
         f'    <rect x="{MX}" y="{MY}" width="{MW}" height="{MH}" fill="{C}"/>\n'
-        f'    <g clip-path="url(#cM)"><rect class="sM" x="21" y="{MY}" width="18" height="{MH}" fill="url(#sheen)"/></g>\n'
+        f'    <g clip-path="url(#cM)"><rect class="sM" x="8"  y="{MY}" width="9" height="{MH}" fill="url(#sheen)"/></g>\n'
         f'    <rect x="{RX}" y="{RY}" width="{RW}" height="{RH}" fill="{C}"/>\n'
-        f'    <g clip-path="url(#cR)"><rect class="sR" x="36" y="{RY}" width="18" height="{RH}" fill="url(#sheen)"/></g>'
+        f'    <g clip-path="url(#cR)"><rect class="sR" x="14" y="{RY}" width="9" height="{RH}" fill="url(#sheen)"/></g>'
     )
     return make_svg(defs, style, body)
 

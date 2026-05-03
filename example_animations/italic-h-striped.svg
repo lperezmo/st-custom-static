@@ -1,25 +1,25 @@
-<svg width="60" height="36" viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
+<svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
   <style>
     @keyframes reveal{0%,100%{opacity:.25}50%{opacity:1}}
     .c0{animation:reveal 1.6s ease-in-out 0s   infinite}
     .c1{animation:reveal 1.6s ease-in-out 0.2s infinite}
     .c2{animation:reveal 1.6s ease-in-out 0.4s infinite}
   </style>
-  <g transform="translate(30,18) skewX(-12) translate(-30,-18)">
-    <rect class="c0" x="12" y="4" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c0" x="12" y="10" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c0" x="12" y="16" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c0" x="12" y="22" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c0" x="12" y="28" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c1" x="26" y="4" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c1" x="26" y="10" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c1" x="26" y="16" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c1" x="26" y="22" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c1" x="26" y="28" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c2" x="40" y="4" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c2" x="40" y="10" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c2" x="40" y="16" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c2" x="40" y="22" width="8" height="4" rx="2" fill="#004F98"/>
-    <rect class="c2" x="40" y="28" width="8" height="4" rx="2" fill="#004F98"/>
+  <g transform="translate(12,12) skewX(-12) translate(-12,-12)">
+    <rect class="c0" x="4" y="5" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c0" x="4" y="8" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c0" x="4" y="11" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c0" x="4" y="14" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c0" x="4" y="17" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c1" x="10" y="5" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c1" x="10" y="8" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c1" x="10" y="11" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c1" x="10" y="14" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c1" x="10" y="17" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c2" x="16" y="5" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c2" x="16" y="8" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c2" x="16" y="11" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c2" x="16" y="14" width="4" height="2" rx="2" fill="#004F98"/>
+    <rect class="c2" x="16" y="17" width="4" height="2" rx="2" fill="#004F98"/>
   </g>
 </svg>
