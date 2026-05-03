@@ -75,7 +75,7 @@ with st.sidebar:
 
     st.divider()
     st.caption("Install locally:")
-    st.code("pip install st-custom-static\nst-install --icon italic-h-sweep", language="bash")
+    st.code("uv add st-custom-static\nst-install --icon italic-h-sweep", language="bash")
 
 _btn_label = "Reload" if mode == "Time series" else "Run simulation"
 if st.button(_btn_label, type="primary"):
