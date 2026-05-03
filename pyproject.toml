@@ -1,0 +1,16 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "st-custom-static"
+version = "0.1.0"
+description = "Custom loading animations for Streamlit"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+st-install = "st_custom_static.install:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["st_custom_static"]

@@ -1,3 +1,14 @@
+# Build artifacts
+manual-build/streamlit/
+dist/
+streamlit-src/
+*.zip
+
+# uv
+demo/.venv/
+.venv/
+uv.lock
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
