@@ -5,9 +5,30 @@ build-backend = "hatchling.build"
 [project]
 name = "st-custom-static"
 version = "0.1.0"
-description = "Custom loading animations for Streamlit"
+description = "Custom loading animations for Streamlit - replaces the default spinner with polished alternatives"
+readme = "README.md"
 requires-python = ">=3.9"
+license = { text = "MIT" }
+authors = [{ name = "Luis Perez", email = "lperezmo05@gmail.com" }]
+keywords = ["streamlit", "animation", "spinner", "loading", "custom"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/lperezmo/st-custom-static"
+Repository = "https://github.com/lperezmo/st-custom-static"
+"Bug Tracker" = "https://github.com/lperezmo/st-custom-static/issues"
 
 [project.scripts]
 st-install = "st_custom_static.install:main"
