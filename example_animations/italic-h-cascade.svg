@@ -1,45 +1,23 @@
-<svg width="72" height="44" viewBox="0 0 72 44" xmlns="http://www.w3.org/2000/svg">
+<svg width="60" height="36" viewBox="0 0 60 36" xmlns="http://www.w3.org/2000/svg">
   <style>
-    .s { fill: #808495; }
-    @keyframes cas {
-      0%, 100% { opacity: 0.15; }
-      50%       { opacity: 1; }
-    }
-    /* left col delays: 0, 0.08, 0.16, 0.24, 0.32 */
-    .l0 { animation: cas 1.8s ease-in-out infinite 0.00s; }
-    .l1 { animation: cas 1.8s ease-in-out infinite 0.08s; }
-    .l2 { animation: cas 1.8s ease-in-out infinite 0.16s; }
-    .l3 { animation: cas 1.8s ease-in-out infinite 0.24s; }
-    .l4 { animation: cas 1.8s ease-in-out infinite 0.32s; }
-    /* mid col delays: 0.4, 0.48, 0.56, 0.64, 0.72 */
-    .m0 { animation: cas 1.8s ease-in-out infinite 0.40s; }
-    .m1 { animation: cas 1.8s ease-in-out infinite 0.48s; }
-    .m2 { animation: cas 1.8s ease-in-out infinite 0.56s; }
-    .m3 { animation: cas 1.8s ease-in-out infinite 0.64s; }
-    .m4 { animation: cas 1.8s ease-in-out infinite 0.72s; }
-    /* right col delays: 0.8, 0.88, 0.96, 1.04, 1.12 */
-    .r0 { animation: cas 1.8s ease-in-out infinite 0.80s; }
-    .r1 { animation: cas 1.8s ease-in-out infinite 0.88s; }
-    .r2 { animation: cas 1.8s ease-in-out infinite 0.96s; }
-    .r3 { animation: cas 1.8s ease-in-out infinite 1.04s; }
-    .r4 { animation: cas 1.8s ease-in-out infinite 1.12s; }
+    @keyframes cascH{0%,20%,100%{opacity:.2}10%{opacity:1}}
+    .cs{opacity:.2;animation:cascH 2s ease-in-out infinite}
   </style>
-  <!-- left bar: 5 stripes top-to-bottom -->
-  <polygon class="s l0" points="18,0    30,0    29.3,8.4  17.3,8.4"/>
-  <polygon class="s l1" points="17.3,8.4  29.3,8.4  28.6,16.8 16.6,16.8"/>
-  <polygon class="s l2" points="16.6,16.8 28.6,16.8 27.9,25.2 15.9,25.2"/>
-  <polygon class="s l3" points="15.9,25.2 27.9,25.2 27.2,33.6 15.2,33.6"/>
-  <polygon class="s l4" points="15.2,33.6 27.2,33.6 26.6,42   14.6,42"/>
-  <!-- cross bar: 5 stripes left-to-right -->
-  <polygon class="s m0" points="26,17   31.2,17 30.8,27 25.6,27"/>
-  <polygon class="s m1" points="31.2,17 36.4,17 36.0,27 30.8,27"/>
-  <polygon class="s m2" points="36.4,17 41.6,17 41.2,27 36.0,27"/>
-  <polygon class="s m3" points="41.6,17 46.8,17 46.4,27 41.2,27"/>
-  <polygon class="s m4" points="46.8,17 52,17   51.6,27 46.4,27"/>
-  <!-- right bar: 5 stripes top-to-bottom -->
-  <polygon class="s r0" points="60,0    72,0    71.3,8.4  59.3,8.4"/>
-  <polygon class="s r1" points="59.3,8.4  71.3,8.4  70.6,16.8 58.6,16.8"/>
-  <polygon class="s r2" points="58.6,16.8 70.6,16.8 69.9,25.2 57.9,25.2"/>
-  <polygon class="s r3" points="57.9,25.2 69.9,25.2 69.2,33.6 57.2,33.6"/>
-  <polygon class="s r4" points="57.2,33.6 69.2,33.6 68.5,42   56.5,42"/>
+  <g transform="translate(30,18) skewX(-12) translate(-30,-18)">
+    <rect class="cs" style="animation-delay:0s" x="12" y="4" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.08s" x="12" y="10" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.16s" x="12" y="16" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.24s" x="12" y="22" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.32s" x="12" y="28" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.4s" x="26" y="4" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.48s" x="26" y="10" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.56s" x="26" y="16" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.64s" x="26" y="22" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.72s" x="26" y="28" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.8s" x="40" y="4" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.88s" x="40" y="10" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:0.96s" x="40" y="16" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:1.04s" x="40" y="22" width="8" height="4" rx="2" fill="#004F98"/>
+    <rect class="cs" style="animation-delay:1.12s" x="40" y="28" width="8" height="4" rx="2" fill="#004F98"/>
+  </g>
 </svg>
