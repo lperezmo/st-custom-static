@@ -1,0 +1,10 @@
+.git
+.github
+icons/
+scripts/
+manual-build/
+example_animations/
+st_custom_static/
+pyproject.toml
+*.md
+*.toml
