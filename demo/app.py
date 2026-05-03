@@ -1,15 +1,27 @@
+import sys
 import time
+from pathlib import Path
 
 import altair as alt
 import numpy as np
 import pandas as pd
 import streamlit as st
+
+# Import from repo root so this works on Streamlit Cloud even during hot-reloads
+# when the package may not be pip-installed yet.
+_repo_root = Path(__file__).parent.parent
+if str(_repo_root) not in sys.path:
+    sys.path.insert(0, str(_repo_root))
+
 from st_custom_static import install, GITHUB_REPO
 
 
 @st.cache_resource(show_spinner=False)
 def _apply_icon() -> None:
-    install("italic-h-sweep", None, GITHUB_REPO)
+    try:
+        install("italic-h-sweep", None, GITHUB_REPO)
+    except SystemExit:
+        pass  # unsupported version or download failed, continue with default icon
 
 
 _apply_icon()

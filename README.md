@@ -4,6 +4,7 @@
 [![Python versions](https://img.shields.io/pypi/pyversions/st-custom-static)](https://pypi.org/project/st-custom-static/)
 [![License](https://img.shields.io/github/license/lperezmo/st-custom-static)](LICENSE)
 [![Build](https://img.shields.io/github/actions/workflow/status/lperezmo/st-custom-static/build-release.yml?label=build)](https://github.com/lperezmo/st-custom-static/actions/workflows/build-release.yml)
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://st-custom-static.streamlit.app/)
 
 Drop-in replacements for Streamlit's default loading animation. Swap out the running man with one of 13 polished alternatives in seconds.
 
