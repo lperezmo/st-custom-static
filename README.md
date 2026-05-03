@@ -11,6 +11,13 @@ Drop-in replacements for Streamlit's default loading animation. Swap out the run
 ## Install
 
 ```bash
+uv add st-custom-static
+st-install --icon italic-h-sweep
+```
+
+Or with pip:
+
+```bash
 pip install st-custom-static
 st-install --icon italic-h-sweep
 ```
@@ -59,7 +66,7 @@ Add to `pyproject.toml` or `requirements.txt`:
 st-custom-static
 ```
 
-Then run `st-install --icon <name>` once after `pip install`.
+Then run `st-install --icon <name>` once after installing.
 
 ## Manual build
 
