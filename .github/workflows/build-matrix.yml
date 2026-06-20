@@ -1,0 +1,143 @@
+name: Build Matrix (reusable)
+
+# Reusable build core: builds Streamlit custom-static bundles for one icon
+# across a comma-separated list of versions, publishing a prerelease per
+# version. Called by build-release.yml (manual) and watch-streamlit.yml (cron).
+
+on:
+  workflow_call:
+    inputs:
+      icon:
+        description: Icon animation to build
+        required: true
+        type: string
+      versions:
+        description: Streamlit versions, comma-separated
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.parse.outputs.matrix }}
+    steps:
+      - id: parse
+        shell: bash
+        env:
+          VERSIONS: ${{ inputs.versions }}
+        run: |
+          MATRIX=$(python3 -c "
+          import os, json
+          v = os.environ['VERSIONS'].split(',')
+          print(json.dumps({'version': [x.strip() for x in v if x.strip()]}))
+          ")
+          echo "matrix=$MATRIX" >> "$GITHUB_OUTPUT"
+
+  build:
+    name: ${{ inputs.icon }} / ${{ matrix.version }}
+    needs: setup
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+
+      - uses: actions/setup-node@v4.4.0
+        with:
+          node-version: '20'
+
+      - name: Install system deps
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y protobuf-compiler rsync
+
+      - name: Clone Streamlit ${{ matrix.version }}
+        run: |
+          git clone --depth 1 \
+            --branch ${{ matrix.version }} \
+            https://github.com/streamlit/streamlit.git \
+            streamlit-src
+
+      - name: Apply icon
+        run: |
+          ICON="${{ inputs.icon }}"
+          SRC="icons/${ICON}.tsx"
+          DST="streamlit-src/frontend/app/src/components/StatusWidget/IconRunning.tsx"
+          [ -f "$SRC" ] || { echo "Icon not found: $SRC"; exit 1; }
+          cp "$SRC" "$DST"
+          echo "Applied $ICON"
+
+      - name: Enable corepack
+        working-directory: streamlit-src/frontend
+        run: |
+          corepack enable
+          corepack install
+
+      - name: Install frontend deps
+        working-directory: streamlit-src/frontend
+        run: yarn install --immutable
+
+      - name: Build frontend
+        working-directory: streamlit-src/frontend
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+        run: yarn workspaces foreach --all --topological run build
+
+      - name: Package static files
+        id: package
+        run: |
+          ICON="${{ inputs.icon }}"
+          VERSION="${{ matrix.version }}"
+          ZIPNAME="streamlit-${VERSION}-${ICON}.zip"
+
+          mkdir -p dist/static
+          rsync -av --delete --delete-excluded --exclude=reports \
+            streamlit-src/frontend/app/build/ dist/static/
+
+          if [ -f dist/static/.vite/manifest.json ]; then
+            mv dist/static/.vite/manifest.json dist/static/manifest.json
+            rm -rf dist/static/.vite
+          fi
+
+          cd dist && zip -r "../${ZIPNAME}" static/
+          echo "zipname=${ZIPNAME}" >> "$GITHUB_OUTPUT"
+
+      - name: Create or update GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          ICON="${{ inputs.icon }}"
+          VERSION="${{ matrix.version }}"
+          TAG="v${VERSION}-${ICON}"
+          ZIPNAME="${{ steps.package.outputs.zipname }}"
+
+          NOTES="Custom static files for Streamlit \`${VERSION}\` with the \`${ICON}\` loading animation.
+
+          ## Quick install
+
+          \`\`\`bash
+          python scripts/install_static.py --icon ${ICON} --version ${VERSION}
+          \`\`\`
+
+          Or download and extract manually: replace Streamlit's \`static/\` folder with the extracted one.
+
+          Built from commit: \`${{ github.sha }}\`"
+
+          REPO="${{ github.repository }}"
+          if gh release view "$TAG" --repo "$REPO" &>/dev/null 2>&1; then
+            gh release upload "$TAG" --repo "$REPO" "${ZIPNAME}" --clobber
+          else
+            gh release create "$TAG" \
+              --repo "$REPO" \
+              --title "Streamlit ${VERSION} - ${ICON}" \
+              --notes "$NOTES" \
+              --prerelease \
+              "${ZIPNAME}" \
+            || gh release upload "$TAG" --repo "$REPO" "${ZIPNAME}" --clobber
+          fi

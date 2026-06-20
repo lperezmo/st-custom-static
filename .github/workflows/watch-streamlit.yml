@@ -1,0 +1,92 @@
+name: Watch Streamlit Releases
+
+# Daily check for a new STABLE Streamlit release. When the latest stable
+# version has no custom-static builds yet, build all icons for it via the
+# reusable build-matrix workflow. Manual runs accept an override version and
+# can force a rebuild even if releases already exist.
+
+on:
+  schedule:
+    # 13:20 UTC daily (Streamlit ships roughly monthly; daily catches it fast)
+    - cron: '20 13 * * *'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Override version to build (blank = latest stable Streamlit)
+        required: false
+        type: string
+      force:
+        description: Build even if releases for this version already exist
+        required: false
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.decide.outputs.version }}
+      should_build: ${{ steps.decide.outputs.should_build }}
+    steps:
+      - id: decide
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OVERRIDE: ${{ inputs.version }}
+          FORCE: ${{ inputs.force }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          if [ -n "${OVERRIDE:-}" ]; then
+            VERSION="$OVERRIDE"
+          else
+            # /releases/latest excludes prereleases and drafts -> stable only.
+            VERSION=$(gh api repos/streamlit/streamlit/releases/latest --jq .tag_name)
+          fi
+          echo "Latest stable Streamlit version: $VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
+          if [ "${FORCE:-false}" = "true" ]; then
+            echo "Force enabled -> building."
+            echo "should_build=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if gh release list --repo "$REPO" --limit 500 | grep -q "v${VERSION}-"; then
+            echo "Releases for v${VERSION}-* already exist -> skipping."
+            echo "should_build=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "No releases for v${VERSION} yet -> building."
+            echo "should_build=true" >> "$GITHUB_OUTPUT"
+          fi
+
+  build:
+    needs: check
+    if: needs.check.outputs.should_build == 'true'
+    permissions:
+      contents: write
+    strategy:
+      fail-fast: false
+      matrix:
+        icon:
+          - italic-h-sweep
+          - italic-h-striped
+          - italic-h-wave
+          - italic-h-scan
+          - italic-h-sequential
+          - italic-h-cascade
+          - three-dots
+          - bar-chart
+          - progress-ring
+          - spinning-sync
+          - pulsing-dot
+          - rotating-gear
+          - hourglass
+    uses: ./.github/workflows/build-matrix.yml
+    with:
+      icon: ${{ matrix.icon }}
+      versions: ${{ needs.check.outputs.version }}
+    secrets: inherit
