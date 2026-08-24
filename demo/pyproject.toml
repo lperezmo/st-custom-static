@@ -6,11 +6,15 @@ name = "st-custom-static-demo"
 version = "0.1.0"
 requires-python = ">=3.10"
 dependencies = [
-    "streamlit==1.57.0",
+    "streamlit==1.62.0",
     "pandas>=2.0.0",
     "altair>=5.0.0",
     "numpy>=1.24.0",
     "st-custom-static",
-    # Pin transitive starlette above CVE-2026-54282 / CVE-2026-54283 (GHSA-jp82-jpqv-5vv3, GHSA-82w8-qh3p-5jfq)
+    # Pin transitive Starlette above CVE-2026-54282 / CVE-2026-54283
+    # (GHSA-jp82-jpqv-5vv3, GHSA-82w8-qh3p-5jfq).
     "starlette>=1.3.1",
+    # Pin Streamlit's multipart parser above CVE-2026-42561
+    # (GHSA-pp6c-gr5w-3c5g).
+    "python-multipart>=0.0.27",
 ]
