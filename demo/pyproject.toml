@@ -4,9 +4,10 @@ package-mode = false
 [project]
 name = "st-custom-static-demo"
 version = "0.1.0"
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
-    "streamlit==1.62.0",
+    # 1.66.1 is the first Streamlit that allows Pillow 13.
+    "streamlit==1.66.1",
     "pandas>=2.0.0",
     "altair>=5.0.0",
     "numpy>=1.24.0",
@@ -17,4 +18,10 @@ dependencies = [
     # Pin Streamlit's multipart parser above CVE-2026-42561
     # (GHSA-pp6c-gr5w-3c5g).
     "python-multipart>=0.0.27",
+    # Pin transitive Pillow, certifi and urllib3 above their open advisories
+    # (Pillow GHSA-8g5g-8vmr-9782 and others, certifi GHSA-6q48-6c7w-9gw2,
+    # urllib3 GHSA-8988-9cw3-xx77, GHSA-vxq7-64xx-v4gw, GHSA-gh4c-6fx4-qh6g).
+    "pillow>=13.0.0",
+    "certifi>=2026.10.19",
+    "urllib3>=2.8.0",
 ]
