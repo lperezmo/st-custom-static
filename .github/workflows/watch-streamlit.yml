@@ -1,14 +1,14 @@
 name: Watch Streamlit Releases
 
-# Daily check for a new STABLE Streamlit release. When the latest stable
-# version has no custom-static builds yet, build all icons for it via the
-# reusable build-matrix workflow. Manual runs accept an override version and
-# can force a rebuild even if releases already exist.
+# Weekly check for a new STABLE Streamlit release. When the latest stable
+# version is missing the custom-static release of any icon, build all icons
+# for it via the reusable build-matrix workflow. Manual runs accept an
+# override version and can force a rebuild even if releases already exist.
 
 on:
   schedule:
-    # 13:20 UTC daily (Streamlit ships roughly monthly; daily catches it fast)
-    - cron: '20 13 * * *'
+    # 13:20 UTC every Monday (Streamlit ships roughly monthly)
+    - cron: '20 13 * * 1'
   workflow_dispatch:
     inputs:
       version:
@@ -30,6 +30,7 @@ jobs:
     outputs:
       version: ${{ steps.decide.outputs.version }}
       should_build: ${{ steps.decide.outputs.should_build }}
+      icons: ${{ steps.decide.outputs.icons }}
     steps:
       - id: decide
         env:
@@ -37,6 +38,21 @@ jobs:
           OVERRIDE: ${{ inputs.version }}
           FORCE: ${{ inputs.force }}
           REPO: ${{ github.repository }}
+          # Single source for the icon list: the build matrix below uses it too.
+          ICONS: >-
+            italic-h-sweep
+            italic-h-striped
+            italic-h-wave
+            italic-h-scan
+            italic-h-sequential
+            italic-h-cascade
+            three-dots
+            bar-chart
+            progress-ring
+            spinning-sync
+            pulsing-dot
+            rotating-gear
+            hourglass
         run: |
           set -euo pipefail
 
@@ -48,6 +64,7 @@ jobs:
           fi
           echo "Latest stable Streamlit version: $VERSION"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          echo "icons=$(jq -cn --arg s "$ICONS" '$s | split(" ") | map(select(length > 0))')" >> "$GITHUB_OUTPUT"
 
           if [ "${FORCE:-false}" = "true" ]; then
             echo "Force enabled -> building."
@@ -55,11 +72,22 @@ jobs:
             exit 0
           fi
 
-          if gh release list --repo "$REPO" --limit 500 | grep -q "v${VERSION}-"; then
-            echo "Releases for v${VERSION}-* already exist -> skipping."
+          # Look up each expected release by tag. No pipe (a `gh ... | grep -q`
+          # pipeline fails under pipefail when grep exits early and gh gets
+          # SIGPIPE) and no list limit. Build if ANY icon's release is missing,
+          # so a partially completed earlier run gets finished.
+          MISSING=""
+          for ICON in $ICONS; do
+            if ! gh release view "v${VERSION}-${ICON}" --repo "$REPO" >/dev/null 2>&1; then
+              MISSING="$MISSING $ICON"
+            fi
+          done
+
+          if [ -z "$MISSING" ]; then
+            echo "All releases for v${VERSION}-* already exist -> skipping."
             echo "should_build=false" >> "$GITHUB_OUTPUT"
           else
-            echo "No releases for v${VERSION} yet -> building."
+            echo "Missing releases for v${VERSION}:${MISSING} -> building."
             echo "should_build=true" >> "$GITHUB_OUTPUT"
           fi
 
@@ -71,20 +99,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        icon:
-          - italic-h-sweep
-          - italic-h-striped
-          - italic-h-wave
-          - italic-h-scan
-          - italic-h-sequential
-          - italic-h-cascade
-          - three-dots
-          - bar-chart
-          - progress-ring
-          - spinning-sync
-          - pulsing-dot
-          - rotating-gear
-          - hourglass
+        icon: ${{ fromJson(needs.check.outputs.icons) }}
     uses: ./.github/workflows/build-matrix.yml
     with:
       icon: ${{ matrix.icon }}
