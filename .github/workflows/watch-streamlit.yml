@@ -1,9 +1,10 @@
 name: Watch Streamlit Releases
 
 # Weekly check for a new STABLE Streamlit release. When the latest stable
-# version is missing the custom-static release of any icon, build all icons
-# for it via the reusable build-matrix workflow. Manual runs accept an
-# override version and can force a rebuild even if releases already exist.
+# version is missing the custom-static release of any icon, build only the
+# missing icons for it via the reusable build-matrix workflow. Manual runs
+# accept an override version and can force a rebuild of every icon even if
+# releases already exist.
 
 on:
   schedule:
@@ -64,18 +65,23 @@ jobs:
           fi
           echo "Latest stable Streamlit version: $VERSION"
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "icons=$(jq -cn --arg s "$ICONS" '$s | split(" ") | map(select(length > 0))')" >> "$GITHUB_OUTPUT"
+
+          # Space-separated names -> compact JSON array for fromJson (always
+          # well formed; an empty list gives []).
+          to_json() { jq -cn --arg s "$1" '$s | split(" ") | map(select(length > 0))'; }
 
           if [ "${FORCE:-false}" = "true" ]; then
-            echo "Force enabled -> building."
+            echo "Force enabled -> building all icons."
+            echo "icons=$(to_json "$ICONS")" >> "$GITHUB_OUTPUT"
             echo "should_build=true" >> "$GITHUB_OUTPUT"
             exit 0
           fi
 
           # Look up each expected release by tag. No pipe (a `gh ... | grep -q`
           # pipeline fails under pipefail when grep exits early and gh gets
-          # SIGPIPE) and no list limit. Build if ANY icon's release is missing,
-          # so a partially completed earlier run gets finished.
+          # SIGPIPE) and no list limit. Build only the icons whose release is
+          # missing, so a partially completed earlier run gets finished without
+          # rebuilding and re-publishing the icons that already succeeded.
           MISSING=""
           for ICON in $ICONS; do
             if ! gh release view "v${VERSION}-${ICON}" --repo "$REPO" >/dev/null 2>&1; then
@@ -83,11 +89,13 @@ jobs:
             fi
           done
 
+          echo "icons=$(to_json "$MISSING")" >> "$GITHUB_OUTPUT"
           if [ -z "$MISSING" ]; then
+            # The build job is skipped, so its (empty) matrix is never used.
             echo "All releases for v${VERSION}-* already exist -> skipping."
             echo "should_build=false" >> "$GITHUB_OUTPUT"
           else
-            echo "Missing releases for v${VERSION}:${MISSING} -> building."
+            echo "Missing releases for v${VERSION}:${MISSING} -> building those."
             echo "should_build=true" >> "$GITHUB_OUTPUT"
           fi
 
