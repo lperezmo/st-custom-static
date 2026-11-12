@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v1.0.3 (2026-11-12)
+
+### Bug Fixes
+
+- **ci**: Build only missing icon variants, raise apt step timeout to 8 min
+  ([#5](https://github.com/lperezmo/st-custom-static/pull/5),
+  [`da6ec77`](https://github.com/lperezmo/st-custom-static/commit/da6ec7738f609620176a3b8ab86ed769c2152095))
+
+
 ## v1.0.2 (2026-11-12)
 
 ### Bug Fixes
