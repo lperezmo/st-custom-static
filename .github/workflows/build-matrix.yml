@@ -41,6 +41,7 @@ jobs:
     name: ${{ inputs.icon }} / ${{ matrix.version }}
     needs: setup
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     strategy:
       fail-fast: false
       matrix: ${{ fromJson(needs.setup.outputs.matrix) }}
@@ -53,6 +54,7 @@ jobs:
           node-version: '20'
 
       - name: Install system deps
+        timeout-minutes: 5
         run: |
           sudo apt-get update -q
           sudo apt-get install -y protobuf-compiler rsync
